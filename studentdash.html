@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student Dashboard - Attendance & Timetable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        h1, h2 {
+            color: white;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.95); /* Increased opacity for better contrast */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            border-radius: 10px;
+            overflow: hidden;
+            color: #333; /* Changed to dark text for better readability */
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 16px;
+            color: #222; /* Ensuring text is clearly visible */
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(242, 242, 242, 0.9);
+        }
+
+        .present {
+            background-color: #b2ffb2; /* Green for Present */
+            color: #000; /* Dark text for visibility */
+        }
+
+        .absent {
+            background-color: #ffb2b2; /* Red for Absent */
+            color: #000; /* Dark text for visibility */
+        }
+
+        .not-marked {
+            background-color: #f2f2f2; /* Gray for Not Marked */
+            color: #000; /* Dark text for visibility */
+        }
+
+        /* Button Styles */
+        .toggle-btn {
+            padding: 12px 20px;
+            font-size: 16px;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+            transition: all 0.3s ease-in-out;
+            font-weight: bold;
+        }
+
+        .toggle-btn:hover {
+            background: linear-gradient(45deg, #45a049, #388e3c);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ student_name }}</h1>
+    
+    <!-- Buttons to Toggle Sections -->
+    <button class="toggle-btn" onclick="toggleSection('attendance-table', 'attendance-title', this)">View Attendance</button>
+    <button class="toggle-btn" onclick="toggleSection('timetable-table', 'timetable-title', this)">View Timetable</button>
+
+    <!-- Attendance Section -->
+    <h2 id="attendance-title" style="display: none;">Attendance Record</h2>
+    <table id="attendance-table">
+        <tr>
+            <th>Date</th>
+            <th>Subject</th>
+            <th>Status</th>
+        </tr>
+        {% for date, subjects in attendance.items() %}
+            {% for subject, status in subjects.items() %}
+            <tr>
+                <td>{{ date }}</td>
+                <td>{{ subject }}</td>
+                <td class="{{ 'present' if status == 'Present' else 'absent' if status == 'Absent' else 'not-marked' }}">
+                    {{ status }}
+                </td>
+            </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+
+    <!-- Timetable Section -->
+    <h2 id="timetable-title" style="display: none;">Weekly Timetable</h2>
+    <table id="timetable-table">
+        <tr>
+            <th>Day</th>
+            <th>Period 1</th>
+            <th>Period 2</th>
+            <th>Period 3</th>
+            <th>Period 4</th>
+            <th>Period 5</th>
+            <th>Period 6</th>
+            <th>Period 7</th>
+        </tr>
+        <tr>
+            <td>Monday</td>
+            <td>MiniProject</td>
+            <td>MiniProject</td>
+            <td>MiniProject</td>
+            <td>CD</td>
+            <td>IEFT</td>
+            <td>CD</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>Tuesday</td>
+            <td>Program Elective</td>
+            <td>CD</td>
+            <td>Comprehensive</td>
+            <td>AAD</td>
+            <td>CGIP</td>
+            <td>Program Elective</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>Wednesday</td>
+            <td>CN Lab</td>
+            <td>CN Lab</td>
+            <td>CN Lab</td>
+            <td>Program Elective</td>
+            <td>AAD</td>
+            <td>CGIP</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>Thursday</td>
+            <td>AAD</td>
+            <td>CGIP</td>
+            <td>IEFT</td>
+            <td>AAD</td>
+            <td>CGIP</td>
+            <td>Program Elective</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>Friday</td>
+            <td>CD</td>
+            <td>Comprehensive</td>
+            <td>CGIP</td>
+            <td>Mentoring</td>
+            <td>CD</td>
+            <td>AAD</td>
+            <td>IEFT</td>
+        </tr>
+    </table>
+
+    <script>
+        function toggleSection(tableId, titleId, button) {
+            let table = document.getElementById(tableId);
+            let title = document.getElementById(titleId);
+
+            if (table.style.display === "none") {
+                table.style.display = "table"; 
+                title.style.display = "block"; 
+                button.innerText = button.innerText.replace("View", "Hide");
+            } else {
+                table.style.display = "none"; 
+                title.style.display = "none"; 
+                button.innerText = button.innerText.replace("Hide", "View");
+            }
+        }
+    </script>
+</body>
+</html>
