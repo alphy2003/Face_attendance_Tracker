@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard - Attendance Tracker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #4a90e2, #357ab7);
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    .header {
+      background-color: rgba(74, 144, 226, 0.9);
+      padding: 20px;
+      color: white;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      color: #333;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 20px;
+      margin: 10px;
+      background: linear-gradient(45deg, #4a90e2, #357ab7);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .button:hover {
+      background: linear-gradient(45deg, #357ab7, #2a5d99);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .logout {
+      background: linear-gradient(45deg, #e94e77, #d43b61);
+    }
+
+    .logout:hover {
+      background: linear-gradient(45deg, #d43b61, #b52a4a);
+    }
+
+    .attendance-section {
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      color: #222;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      font-size: 16px;
+    }
+
+    th {
+      background-color: #4a90e2;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(242, 242, 242, 0.9);
+    }
+
+    tr:hover {
+      background-color: rgba(220, 220, 220, 0.9);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    Teacher Dashboard - Real-Time Attendance Tracker
+  </div>
+
+  <div class="container">
+    <h2>Welcome, {{teacher_name}}</h2>
+
+    <a href="/start_attendance" class="button">📷 Start Attendance</a>
+    <a href="/view_attendance" class="button">📊 View Attendance</a>
+    <a href="/logout" class="button logout">🚪 Logout</a>
+
+    
+  </div>
+</body>
+</html>
