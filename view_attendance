@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            display: block;
+            width: fit-content;
+            margin: 10px auto 20px auto;
+            padding: 10px 20px;
+            background-color: #4285f4;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .back-button:hover {
+            background-color: #357ae8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4285f4;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e8f0fe;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 View Attendance for {{ subject }}</h1>  <!-- Displays the subject -->
+
+        <a href="{{ url_for('dashboard') }}" class="back-button">🏠 Back to Dashboard</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Date</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in attendance_data %}
+                <tr>
+                    <td>{{ record['student_id'] }}</td>  <!-- Display Student ID -->
+                    <td>{{ record['student_name'] }}</td>  <!-- Display Student Name -->
+                    <td>{{ record['date'] }}</td>
+                    <td>{{ record['day'] }}</td>
+                    <td>{{ record['start_time'] }}</td>
+                    <td>{{ record['status'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
